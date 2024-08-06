@@ -1,6 +1,6 @@
-fastapi==0.95.2
-uvicorn[standard]==0.23.1
-sqlalchemy==1.4.46
-pydantic==1.10.9
-psycopg2-binary==2.9.9
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+psycopg2-binary
 python-json-logger
