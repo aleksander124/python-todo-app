@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from crud.items import create_item as crud_create_item, get_item as crud_get_item, get_items as crud_get_items, delete_item as crud_delete_item, update_item as crud_update_item
 from schemas.items import ItemCreate, ItemUpdate, Item
-from dependencies import get_db
+from dependencies.db_connect import get_db
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
