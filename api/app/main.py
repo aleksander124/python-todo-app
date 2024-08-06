@@ -16,7 +16,7 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-app.include_router(items.router, prefix="/api")
+app.include_router(items.router, prefix="/api", tags=["items"])
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 
 

@@ -30,3 +30,8 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 @router.post("/users/", response_model=User)
 def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
     return create_user(db=db, user=user)
+
+
+@router.get("/users/me/", response_model=User)
+async def read_users_me(current_user: User = Depends(get_current_user)):
+    return current_user
