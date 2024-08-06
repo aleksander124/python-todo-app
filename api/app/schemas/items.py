@@ -3,7 +3,7 @@ from typing import Optional
 
 
 class ItemBase(BaseModel):
-    name: str
+    title: str
     description: Optional[str] = None
 
 
