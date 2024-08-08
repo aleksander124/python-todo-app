@@ -1,9 +1,18 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
 
-  let items = [];
-  let error = '';
+  // Define the interface for the item
+  interface Item {
+    id: number;
+    title: string;
+    description: string;
+    completed: boolean;
+  }
 
+  let items: Item[] = []; // Type annotation for items
+  let error: string = '';
+
+  // Fetch items from the API
   onMount(async () => {
     try {
       const response = await fetch('http://localhost:8000/api/items/');
@@ -16,6 +25,28 @@
       error = 'Failed to load data. Please check the console for details.';
     }
   });
+
+  // Toggle the completed state of an item
+  async function toggleCompleted(id: number): Promise<void> {
+    const item = items.find(item => item.id === id);
+    if (item) {
+      item.completed = !item.completed;
+      try {
+        const response = await fetch(`http://localhost:8000/api/items/${id}`, {
+          method: 'PUT', // Use PUT for updating
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ completed: item.completed }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      } catch (e) {
+        console.error('Error updating data:', e);
+      }
+    }
+  }
 </script>
 
 <style>
@@ -32,6 +63,8 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     padding: 20px;
+    display: flex;
+    align-items: center;
   }
 
   .item-title {
@@ -55,6 +88,10 @@
     color: red;
     font-weight: bold;
   }
+
+  .checkbox {
+    margin-right: 15px;
+  }
 </style>
 
 <main>
@@ -68,8 +105,16 @@
   {#if items.length > 0}
     {#each items as item}
       <div class="item-card">
-        <div class="item-title">{item.title}</div>
-        <div class="item-description">{item.description}</div>
+        <input
+                type="checkbox"
+                class="checkbox"
+                checked={item.completed}
+                on:change={() => toggleCompleted(item.id)}
+        />
+        <div>
+          <div class="item-title">{item.title}</div>
+          <div class="item-description">{item.description}</div>
+        </div>
       </div>
     {/each}
   {/if}

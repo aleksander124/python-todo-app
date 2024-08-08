@@ -13,7 +13,9 @@ class ItemCreate(ItemBase):
 
 
 class ItemUpdate(ItemBase):
-    pass
+    title: Optional[str] = None
+    description: Optional[str] = None
+    completed: Optional[bool] = None
 
 
 class Item(ItemBase):
