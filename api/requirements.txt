@@ -7,3 +7,5 @@ python-json-logger
 bcrypt==4.0.1
 passlib
 python-dotenv
+python-jose
+python-multipart
