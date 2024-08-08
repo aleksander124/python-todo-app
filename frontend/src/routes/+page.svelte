@@ -26,24 +26,32 @@
     }
   });
 
-  // Toggle the completed state of an item
+  // Toggle the completed state of an item and update UI immediately
   async function toggleCompleted(id: number): Promise<void> {
-    const item = items.find(item => item.id === id);
-    if (item) {
-      item.completed = !item.completed;
+    let itemIndex = items.findIndex(item => item.id === id);
+    if (itemIndex > -1) {
+      // Toggle the completion state in the UI immediately
+      items[itemIndex].completed = !items[itemIndex].completed;
+
+      // Force the items array to update
+      items = [...items];
+
       try {
         const response = await fetch(`http://localhost:8000/api/items/${id}`, {
           method: 'PUT', // Use PUT for updating
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ completed: item.completed }),
+          body: JSON.stringify({ completed: items[itemIndex].completed }),
         });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
       } catch (e) {
         console.error('Error updating data:', e);
+        // Revert the UI state if the API call fails
+        items[itemIndex].completed = !items[itemIndex].completed;
+        items = [...items];
       }
     }
   }
@@ -65,6 +73,7 @@
     padding: 20px;
     display: flex;
     align-items: center;
+    transition: background-color 0.3s ease;
   }
 
   .item-title {
@@ -92,6 +101,11 @@
   .checkbox {
     margin-right: 15px;
   }
+
+  /* Style for completed tasks */
+  .completed {
+    background-color: #d4edda; /* Light green */
+  }
 </style>
 
 <main>
@@ -103,8 +117,8 @@
     <p class="loading">Loading...</p>
   {/if}
   {#if items.length > 0}
-    {#each items as item}
-      <div class="item-card">
+    {#each items as item (item.id)}
+      <div class="item-card" class:completed={item.completed}>
         <input
                 type="checkbox"
                 class="checkbox"
