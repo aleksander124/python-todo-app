@@ -67,22 +67,34 @@
 
 <style>
   main {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     padding: 20px;
     max-width: 800px;
     margin: auto;
+    background-color: #f0f4f8;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 30px;
   }
 
   .item-card {
-    background: #f9f9f9;
+    background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .item-card:hover {
+    transform: translateY(-5px);
   }
 
   .item-content {
@@ -96,24 +108,24 @@
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #333;
-    text-align: left;
+    color: #1a202c;
   }
 
   .item-description {
     font-size: 1em;
-    color: #555;
-    text-align: left;
+    color: #4a5568;
   }
 
   .loading {
     font-size: 1.2em;
     color: #888;
+    text-align: center;
   }
 
   .error {
     color: red;
     font-weight: bold;
+    text-align: center;
   }
 
   .checkbox {
@@ -121,25 +133,33 @@
   }
 
   .delete-button {
-    background-color: #ff4d4f;
+    background-color: #e53e3e;
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px 15px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
 
   .delete-button:hover {
-    background-color: #ff7875;
+    background-color: #c53030;
   }
 
   .completed {
     background-color: #d4edda;
   }
+
+  .footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #718096;
+  }
 </style>
 
 <main>
-  <h1>Items List</h1>
+  <h1>My Todo List</h1>
   {#if error}
     <p class="error">{error}</p>
   {/if}
@@ -154,13 +174,23 @@
           class="checkbox"
           checked={item.completed}
           on:change={() => toggleCompleted(item.id)}
+          aria-label="Mark as completed"
         />
         <div class="item-content">
           <div class="item-title">{item.title}</div>
           <div class="item-description">{item.description}</div>
         </div>
-        <button class="delete-button" on:click={() => deleteItem(item.id)}>Delete</button>
+        <button
+          class="delete-button"
+          on:click={() => deleteItem(item.id)}
+          aria-label="Delete item"
+        >
+          Delete
+        </button>
       </div>
     {/each}
   {/if}
+  <div class="footer">
+    &copy; 2024 My Todo App
+  </div>
 </main>
