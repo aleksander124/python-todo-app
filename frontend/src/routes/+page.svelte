@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  // Define the interface for the item
   interface Item {
     id: number;
     title: string;
@@ -9,10 +8,9 @@
     completed: boolean;
   }
 
-  let items: Item[] = []; // Type annotation for items
+  let items: Item[] = [];
   let error: string = '';
 
-  // Fetch items from the API
   onMount(async () => {
     try {
       const response = await fetch('http://localhost:8000/api/items/');
@@ -26,19 +24,15 @@
     }
   });
 
-  // Toggle the completed state of an item and update UI immediately
   async function toggleCompleted(id: number): Promise<void> {
     let itemIndex = items.findIndex(item => item.id === id);
     if (itemIndex > -1) {
-      // Toggle the completion state in the UI immediately
       items[itemIndex].completed = !items[itemIndex].completed;
-
-      // Force the items array to update
       items = [...items];
 
       try {
         const response = await fetch(`http://localhost:8000/api/items/${id}`, {
-          method: 'PUT', // Use PUT for updating
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -49,10 +43,24 @@
         }
       } catch (e) {
         console.error('Error updating data:', e);
-        // Revert the UI state if the API call fails
         items[itemIndex].completed = !items[itemIndex].completed;
         items = [...items];
       }
+    }
+  }
+
+  async function deleteItem(id: number): Promise<void> {
+    try {
+      const response = await fetch(`http://localhost:8000/api/items/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      items = items.filter(item => item.id !== id);
+    } catch (e) {
+      console.error('Error deleting data:', e);
+      error = 'Failed to delete the item. Please try again later.';
     }
   }
 </script>
@@ -72,8 +80,16 @@
     margin-bottom: 20px;
     padding: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s ease;
+  }
+
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 15px;
   }
 
   .item-title {
@@ -81,11 +97,13 @@
     font-weight: bold;
     margin-bottom: 10px;
     color: #333;
+    text-align: left;
   }
 
   .item-description {
     font-size: 1em;
     color: #555;
+    text-align: left;
   }
 
   .loading {
@@ -102,9 +120,21 @@
     margin-right: 15px;
   }
 
-  /* Style for completed tasks */
+  .delete-button {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .delete-button:hover {
+    background-color: #ff7875;
+  }
+
   .completed {
-    background-color: #d4edda; /* Light green */
+    background-color: #d4edda;
   }
 </style>
 
@@ -120,15 +150,16 @@
     {#each items as item (item.id)}
       <div class="item-card" class:completed={item.completed}>
         <input
-                type="checkbox"
-                class="checkbox"
-                checked={item.completed}
-                on:change={() => toggleCompleted(item.id)}
+          type="checkbox"
+          class="checkbox"
+          checked={item.completed}
+          on:change={() => toggleCompleted(item.id)}
         />
-        <div>
+        <div class="item-content">
           <div class="item-title">{item.title}</div>
           <div class="item-description">{item.description}</div>
         </div>
+        <button class="delete-button" on:click={() => deleteItem(item.id)}>Delete</button>
       </div>
     {/each}
   {/if}
