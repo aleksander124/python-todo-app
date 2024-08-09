@@ -10,6 +10,8 @@
 
   let items: Item[] = [];
   let error: string = '';
+  let isEditModalOpen = false;
+  let currentItem: Item | null = null;
 
   onMount(async () => {
     try {
@@ -63,9 +65,47 @@
       error = 'Failed to delete the item. Please try again later.';
     }
   }
+
+  function openEditModal(item: Item): void {
+    currentItem = { ...item };
+    isEditModalOpen = true;
+  }
+
+  function closeEditModal(): void {
+    isEditModalOpen = false;
+    currentItem = null;
+  }
+
+  async function saveEdit(): Promise<void> {
+    if (currentItem) {
+      try {
+        const response = await fetch(`http://localhost:8000/api/items/${currentItem.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: currentItem.title,
+            description: currentItem.description,
+            completed: currentItem.completed,
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        items = items.map(item =>
+          item.id === currentItem!.id ? currentItem! : item
+        );
+        closeEditModal();
+      } catch (e) {
+        console.error('Error updating data:', e);
+      }
+    }
+  }
 </script>
 
 <style>
+  /* Styles are the same as before with additional styles for the modal */
   main {
     font-family: 'Roboto', sans-serif;
     padding: 20px;
@@ -132,22 +172,98 @@
     margin-right: 15px;
   }
 
-  .delete-button {
-    background-color: #e53e3e;
+  .delete-button,
+  .edit-button {
+    background-color: #ff4d4f;
     color: white;
     border: none;
     border-radius: 4px;
     padding: 10px 15px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: 5px;
+  }
+
+  .edit-button {
+    background-color: #4caf50;
   }
 
   .delete-button:hover {
     background-color: #c53030;
   }
 
+  .edit-button:hover {
+    background-color: #388e3c;
+  }
+
   .completed {
     background-color: #d4edda;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-header {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+
+  .modal-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .modal-actions button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .modal-save {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .modal-cancel {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .modal-save:hover {
+    background-color: #388e3c;
+  }
+
+  .modal-cancel:hover {
+    background-color: #d32f2f;
   }
 
   .footer {
@@ -181,6 +297,13 @@
           <div class="item-description">{item.description}</div>
         </div>
         <button
+          class="edit-button"
+          on:click={() => openEditModal(item)}
+          aria-label="Edit item"
+        >
+          Edit
+        </button>
+        <button
           class="delete-button"
           on:click={() => deleteItem(item.id)}
           aria-label="Delete item"
@@ -193,4 +316,28 @@
   <div class="footer">
     &copy; 2024 My Todo App
   </div>
+
+  {#if isEditModalOpen && currentItem}
+    <div class="modal">
+      <div class="modal-content">
+        <div class="modal-header">Edit Item</div>
+        <input
+          type="text"
+          class="modal-input"
+          bind:value={currentItem.title}
+          placeholder="Title"
+        />
+        <textarea
+          class="modal-input"
+          bind:value={currentItem.description}
+          placeholder="Description"
+          rows="4"
+        ></textarea>
+        <div class="modal-actions">
+          <button class="modal-cancel" on:click={closeEditModal}>Cancel</button>
+          <button class="modal-save" on:click={saveEdit}>Save</button>
+        </div>
+      </div>
+    </div>
+  {/if}
 </main>
