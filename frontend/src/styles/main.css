@@ -46,6 +46,7 @@ h1 {
 .item-description {
   font-size: 1em;
   color: #4a5568;
+  white-space: pre-line;
 }
 
 .loading {
@@ -94,33 +95,41 @@ h1 {
 
 /* Create Button Style */
 .create-button {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #4a90e2, #007aff); /* Blue gradient background */
   color: white;
   border: none;
-  width: 60px;
+  width: 60px; /* Smaller size */
   height: 60px;
-  border-radius: 50%;
-  font-size: 2em;
+  border-radius: 20px; /* Rounded corners for a modern look */
+  font-size: 1.4em; /* Adjusted icon size */
   cursor: pointer;
   position: fixed;
   bottom: 30px;
   right: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly reduced shadow for smaller size */
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 8px; /* Added padding for better spacing */
+  text-transform: uppercase; /* Optional: Uppercase text for a modern look */
 }
 
 .create-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #007aff, #4a90e2); /* Reverse gradient on hover */
+  transform: translateY(-3px); /* Slight lift on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
 }
 
 .create-icon {
-  font-size: 1.5em;
-  line-height: 1;
+  font-size: 1.8em; /* Adjusted icon size for smaller button */
+  margin: 0; /* Ensures no extra margin */
+  line-height: 1; /* Ensures icon is centered vertically */
+  transition: transform 0.3s ease; /* Smooth icon animation on hover */
+}
+
+.create-button:hover .create-icon {
+  transform: rotate(45deg); /* Rotate icon on hover for a dynamic effect */
 }
 
 
@@ -154,12 +163,12 @@ h1 {
 }
 
 .modal-input {
-  width: 100%;
+  width: 95%;
   padding: 12px; /* Ensure there's enough space around the text */
   margin-bottom: 20px; /* Spacing between fields */
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1.2em; /* Increased font size for better readability */
+  font-size: 1em; /* Increased font size for better readability */
 }
 
 .modal-actions {
