@@ -28,6 +28,12 @@ def authenticate_user(db: Session, email: str, password: str):
         return False
     if not pwd_context.verify(password, user.hashed_password):
         return False
+    if not user.is_active:
+        # You can either return False or raise an HTTP exception here
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Inactive user",
+        )
     return user
 
 
