@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import timedelta
 from dependencies.auth import get_current_user, authenticate_user, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
-from crud.users import create_user, get_user, get_users
+from crud.users import create_user, get_user as crud_get_user, get_users as crud_get_users, delete_user as crud_delete_user
 from schemas.users import UserCreate, User
 from schemas.token import Token
 from dependencies.db_connect import get_db
@@ -42,17 +42,17 @@ def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/users/{user_id}", response_model=User)
-def read_user(user_id: int, db: Session = Depends(get_db)):
-    user = get_user(db, user_id)
+def get_user(user_id: int, db: Session = Depends(get_db)):
+    user = crud_get_user(db, user_id)
     if user is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return user
 
 
 @router.get("/users/", response_model=list[User])
-def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+def get_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     logger.info(f"Fetching items with skip={skip} and limit={limit}")
-    users = get_users(db, skip=skip, limit=limit)
+    users = crud_get_users(db, skip=skip, limit=limit)
     if not users:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No users found")
     return users
@@ -61,3 +61,13 @@ def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
 @router.get("/users/me/", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
+
+
+@router.delete("/users/{user_id}", response_model=User)
+def delete_user(user_id: int, db: Session = Depends(get_db)):
+    logger.info(f"Deleting user with id {user_id}")
+    db_user = crud_delete_user(db=db, user_id=user_id)
+    if db_user is None:
+        logger.error("User not found for deletion", extra={"user_id": user_id})
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
