@@ -12,7 +12,7 @@
     });
 
     try {
-      const response = await fetch('http://localhost:8000/auth/users', {
+      const response = await fetch('http://localhost:8000/auth/create-user', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: formData.toString()
