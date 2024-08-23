@@ -41,7 +41,6 @@ def create_user(db: Session, user: UserCreate):
         username=user.username,
         hashed_password=hashed_password,
         is_active=user.is_active if user.is_active is not None else True,
-        is_superuser=user.is_superuser if user.is_superuser is not None else False
     )
 
     db.add(db_user)
