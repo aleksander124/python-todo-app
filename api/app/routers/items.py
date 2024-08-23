@@ -1,10 +1,10 @@
 import logging
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from crud.items import create_item as crud_create_item, get_item as crud_get_item, get_items as crud_get_items
-from crud.items import delete_item as crud_delete_item, update_item as crud_update_item
-from schemas.items import ItemCreate, ItemUpdate, Item
-from dependencies.db_connect import get_db
+from app.crud.items import create_item as crud_create_item, get_item as crud_get_item, get_items as crud_get_items
+from app.crud.items import delete_item as crud_delete_item, update_item as crud_update_item
+from app.schemas.items import ItemCreate, ItemUpdate, Item
+from app.dependencies.db_connect import get_db
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
