@@ -8,13 +8,17 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
+    username: str
+    email: str
     password: str
+    is_active: Optional[bool] = None
 
 
 class UserUpdate(UserBase):
     username: Optional[str] = None
     email: Optional[str] = None
     password: Optional[str] = None
+    is_active: Optional[bool] = None
 
 
 class User(UserBase):
