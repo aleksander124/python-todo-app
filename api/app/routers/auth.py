@@ -28,7 +28,8 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
+        data={"sub": user.username},
+        expires_delta=access_token_expires
     )
     logger.info("User authenticated successfully")
     return {"access_token": access_token, "token_type": "bearer"}
@@ -60,7 +61,7 @@ def get_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
 
 
 @router.get("/users/me/", response_model=User, description="Retrieve the currently authenticated user's information.")
-async def read_users_me(current_user: User = Depends(get_current_user)):
+async def display_user_info(current_user: User = Depends(get_current_user)):
     return current_user
 
 
