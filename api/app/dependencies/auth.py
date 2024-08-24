@@ -6,10 +6,10 @@ from typing import Optional
 from dotenv import load_dotenv
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import os
-from crud.users import get_user_by_username
-from schemas.token import TokenData
-from dependencies.db_connect import get_db
 from passlib.context import CryptContext
+from app.crud.users import get_user_by_username
+from app.schemas.token import TokenData
+from app.dependencies.db_connect import get_db
 
 load_dotenv()
 

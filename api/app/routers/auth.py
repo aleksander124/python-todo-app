@@ -3,12 +3,12 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import timedelta
-from dependencies.auth import get_current_user, authenticate_user, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
-from crud.users import create_user, get_user as crud_get_user
-from crud.users import get_users as crud_get_users, delete_user as crud_delete_user, update_user as crud_update_user
-from schemas.users import UserCreate, User, UserUpdate
-from schemas.token import Token
-from dependencies.db_connect import get_db
+from app.dependencies.auth import get_current_user, authenticate_user, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
+from app.crud.users import create_user, get_user as crud_get_user
+from app.crud.users import get_users as crud_get_users, delete_user as crud_delete_user, update_user as crud_update_user
+from app.schemas.users import UserCreate, User, UserUpdate
+from app.schemas.token import Token
+from app.dependencies.db_connect import get_db
 
 logger = logging.getLogger(__name__)
 
