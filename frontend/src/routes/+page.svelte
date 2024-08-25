@@ -7,6 +7,10 @@
   const goToTodo = () => {
     window.location.href = '/todo';
   };
+
+  const goToRegister = () => {
+    window.location.href = '/registration';
+  }
 </script>
 
 <style>
@@ -19,6 +23,7 @@
 
   <div class="button-container">
     <button class="button login" on:click={goToLogin}>Login</button>
+    <button class="button register" on:click={goToRegister}>Registration</button>
     <button class="button todo" on:click={goToTodo}>Todo Application</button>
   </div>
 </div>

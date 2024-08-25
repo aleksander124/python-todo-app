@@ -33,6 +33,14 @@
       message = 'An error occurred while trying to login.';
     }
   };
+
+  const redirectToRegister = () => {
+    window.location.href = '/registration';
+  };
+
+  const goToMainMenu = () => {
+    window.location.href = '/'; // Redirect to the main menu
+  };
 </script>
 
 <style>
@@ -49,9 +57,17 @@
     <input id="password" type="password" bind:value={password} placeholder="Enter your password"/>
 
     <button type="submit">Login</button>
-
-    {#if message}
-      <div class="message">{message}</div>
-    {/if}
   </form>
+
+  <button class="button-secondary" on:click={redirectToRegister}>
+    Don't have an account? Register
+  </button>
+
+  <button class="button-tertiary" on:click={goToMainMenu}>
+    Back to Main Menu
+  </button>
+
+  {#if message}
+    <div class="message">{message}</div>
+  {/if}
 </div>

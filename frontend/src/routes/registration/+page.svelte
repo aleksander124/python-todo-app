@@ -33,7 +33,12 @@
   const redirectToLogin = () => {
     window.location.href = '/login'; // Redirect to login page
   };
+
+  const goToMainMenu = () => {
+    window.location.href = '/'; // Redirect to the main menu
+  };
 </script>
+
 
 <style>
   @import '../../styles/register.css';
@@ -56,6 +61,10 @@
 
   <button class="button-secondary" on:click={redirectToLogin}>
     Already have an account? Login
+  </button>
+
+  <button class="button-tertiary" on:click={goToMainMenu}>
+    Back to Main Menu
   </button>
 
   {#if message}

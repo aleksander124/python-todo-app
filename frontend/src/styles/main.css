@@ -7,7 +7,7 @@
     max-width: 800px;
     margin: auto;
     background-color: #f0f4f8;
-    box-sizing: border-box; /* Ensure padding and borders are included in the height and width */
+    box-sizing: border-box;
     font-family: 'Arial', sans-serif;
     text-align: center;
 }
@@ -60,4 +60,12 @@ p {
 
 .button.login:hover {
     background-color: #218838;
+}
+
+.button.register {
+    background-color: #ffc107;
+}
+
+.button.register:hover {
+    background-color: #e0a800;
 }
