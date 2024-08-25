@@ -51,7 +51,31 @@ def get_user_info(client: TestClient, access_token: str):
     assert response_data["username"] == "auth-user"
 
 
+def get_access_token_invalid_user(client: TestClient):
+    invalid_token_data = {
+        "grant_type": "password",
+        "username": "auth-user",
+        "password": "testpassword_invalid",
+        "scope": "",
+        "client_id": "string",
+        "client_secret": "string"
+    }
+
+    headers = {
+        "accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+
+    response = client.post("/auth/token", data=invalid_token_data, headers=headers)
+    assert response.status_code == 401
+    assert response.json() == {"detail": "Incorrect username or password"}
+
+
 def test_user_auth_token_request(client: TestClient):
     create_user(client)
     access_token = get_access_token(client)
     get_user_info(client, access_token)
+
+
+def test_invalid_user_authentication(client: TestClient):
+    get_access_token_invalid_user(client)
