@@ -50,10 +50,27 @@ button {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-bottom: 1rem;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+.button-secondary {
+    background-color: #28a745;
+}
+
+.button-secondary:hover {
+    background-color: #218838;
+}
+
+.button-tertiary {
+    background-color: #6c757d;
+}
+
+.button-tertiary:hover {
+    background-color: #5a6268;
 }
 
 .message {
