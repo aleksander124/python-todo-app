@@ -20,11 +20,31 @@
   let newItem: Item = { id: 0, title: '', description: '', completed: false };
 
   onMount(async () => {
+    const token = localStorage.getItem('token');
+
+    // Redirect to login if no token is found
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+
     try {
-      const response = await fetch('http://localhost:8000/api/items/');
+      const response = await fetch('http://localhost:8000/api/items/', {
+        headers: {
+          'Authorization': `Bearer ${token}`, // Include the token in the request
+          'Content-Type': 'application/json'
+        }
+      });
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        if (response.status === 401) {
+          // If unauthorized, redirect to login
+          window.location.href = '/login';
+        } else {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
       }
+
       items = await response.json();
     } catch (e) {
       console.error('Error fetching data:', e);
@@ -32,16 +52,32 @@
     }
   });
 
+  function logout() {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  }
+
+  function goToMainMenu() {
+    window.location.href = '/';
+  }
+
   async function toggleCompleted(id: number): Promise<void> {
     let itemIndex = items.findIndex(item => item.id === id);
     if (itemIndex > -1) {
       items[itemIndex].completed = !items[itemIndex].completed;
       items = [...items];
 
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = '/login';
+        return;
+      }
+
       try {
         const response = await fetch(`http://localhost:8000/api/items/${id}`, {
           method: 'PUT',
           headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ completed: items[itemIndex].completed }),
@@ -58,9 +94,18 @@
   }
 
   async function deleteItem(id: number): Promise<void> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+
     try {
       const response = await fetch(`http://localhost:8000/api/items/${id}`, {
         method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -83,11 +128,18 @@
   }
 
   async function saveEdit(): Promise<void> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+
     if (currentItem) {
       try {
         const response = await fetch(`http://localhost:8000/api/items/${currentItem.id}`, {
           method: 'PUT',
           headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -119,10 +171,17 @@
   }
 
   async function saveNewItem(): Promise<void> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:8000/api/items/', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newItem),
@@ -141,6 +200,13 @@
 
 <main>
   <h1>Items List</h1>
+
+  <!-- Navigation Buttons -->
+  <div class="navigation-buttons">
+    <button class="main-menu-button" on:click={goToMainMenu}>Back to Main Menu</button>
+    <button class="logout-button" on:click={logout}>Logout</button>
+  </div>
+
   {#if error}
     <p class="error">{error}</p>
   {/if}
