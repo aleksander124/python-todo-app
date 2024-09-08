@@ -3,30 +3,34 @@
   let email = '';
   let password = '';
   let message = '';
+  let messageType = ''; // To manage message type (success or error)
 
   const handleRegister = async () => {
-    const formData = new URLSearchParams({
+    const formData = JSON.stringify({
       username: username,
       email: email,
-      password: password,
+      password: password
     });
 
     try {
-      const response = await fetch('http://localhost:8000/auth/create-user', {
+      const response = await fetch('http://localhost:8000/auth/create-user/', {
         method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: formData.toString()
+        headers: {'Content-Type': 'application/json'},
+        body: formData
       });
 
       if (response.ok) {
         message = 'Registration successful! You can now login.';
+        messageType = 'success'; // Set message type to success
         window.location.href = '/login'; // Redirect to login page
       } else {
         const error = await response.json();
         message = `Error: ${error.detail}`;
+        messageType = 'error'; // Set message type to error
       }
     } catch (error) {
       message = 'An error occurred during registration.';
+      messageType = 'error'; // Set message type to error
     }
   };
 
@@ -39,9 +43,16 @@
   };
 </script>
 
-
 <style>
   @import '../../styles/register.css';
+
+  .message {
+    color: green; /* Set text color to green for success messages */
+  }
+
+  .message.error {
+    color: red; /* Set text color to red for error messages */
+  }
 </style>
 
 <div class="container">
@@ -68,6 +79,6 @@
   </button>
 
   {#if message}
-    <div class="message">{message}</div>
+    <div class={`message ${messageType}`}>{message}</div>
   {/if}
 </div>
