@@ -9,6 +9,7 @@ from app.crud.users import get_users as crud_get_users, delete_user as crud_dele
 from app.schemas.users import UserCreate, User, UserUpdate
 from app.schemas.token import Token
 from app.dependencies.db_connect import get_db
+from app.dependencies.auth import get_current_user, get_current_superuser
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +45,11 @@ def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/users/{user_id}", response_model=User, description="Retrieve a user by their ID.")
-def get_user(user_id: int, db: Session = Depends(get_db)):
+def get_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_superuser)  # Require authentication
+):
     user = crud_get_user(db, user_id)
     if user is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
@@ -52,7 +57,12 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 
 @router.get("/users/", response_model=list[User], description="Retrieve a list of users, with optional pagination.")
-def get_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+def get_users(
+    skip: int = 0,
+    limit: int = 10,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_superuser)  # Require authentication
+):
     logger.info(f"Fetching users with skip={skip} and limit={limit}")
     users = crud_get_users(db, skip=skip, limit=limit)
     if not users:
@@ -67,7 +77,12 @@ async def display_user_info(current_user: User = Depends(get_current_user)):
 
 @router.put("/users/{user_id}", response_model=User,
             description="Update a user's information by their ID. Ensure the email is valid.")
-def update_user(user_id: int, user: UserUpdate, db: Session = Depends(get_db)):
+def update_user(
+    user_id: int,
+    user: UserUpdate,
+    db: Session = Depends(get_db),
+    current_superuser: User = Depends(get_current_superuser)  # Require superuser authentication
+):
     if "@" not in user.email:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid email address")
     logger.info(f"Updating user with id {user_id}", extra={"user_update": user.dict()})
@@ -79,7 +94,11 @@ def update_user(user_id: int, user: UserUpdate, db: Session = Depends(get_db)):
 
 
 @router.delete("/users/{user_id}", response_model=User, description="Delete a user by their ID.")
-def delete_user(user_id: int, db: Session = Depends(get_db)):
+def delete_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_superuser: User = Depends(get_current_superuser)  # Require superuser authentication
+):
     logger.info(f"Deleting user with id {user_id}")
     db_user = crud_delete_user(db=db, user_id=user_id)
     if db_user is None:
