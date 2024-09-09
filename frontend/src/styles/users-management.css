@@ -55,46 +55,47 @@ li:hover {
 }
 
 /* Container for buttons to align them right */
-.button-container {
+.button-container-wrapper {
   display: flex;
-  gap: 10px; /* Add some space between the buttons */
+  justify-content: flex-end;
+  gap: 10px; /* Space between buttons */
+  margin-bottom: 10px; /* Space between the button and the user list */
 }
 
-/* Custom button styles */
+/* Common button styles */
 button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
   padding: 10px 20px;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5; /* Ensures text is vertically centered */
 }
 
-button:hover {
-  background-color: #45a049;
+/* Add New User Button */
+.add-user-btn {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.add-user-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
 }
 
-button[type="submit"] {
-  background-color: #008CBA;
+/* Home Button */
+.home-btn {
+  background: linear-gradient(145deg, #007bff, #0056b3); /* Gradient background */
+  color: white; /* White text */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-button[type="submit"]:hover {
-  background-color: #007bb5;
-}
-
-button[type="button"]:last-child {
-  background-color: #f44336;
-}
-
-button[type="button"]:last-child:hover {
-  background-color: #e53935;
+.home-btn:hover {
+  background: linear-gradient(145deg, #0056b3, #003d7a); /* Darker gradient on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
 /* Modal popup styling */
@@ -161,6 +162,7 @@ button[type="button"]:last-child:hover {
   font-size: 1rem;
 }
 
+/* Button styles for popup */
 .popup button[type="submit"] {
   background-color: #4CAF50;
 }
@@ -177,58 +179,22 @@ button[type="button"]:last-child:hover {
   background-color: #e53935;
 }
 
-.add-user-btn {
-  background-color: #4CAF50; /* Green background */
+/* Edit Button */
+.edit-btn {
+  background-color: #ffa500; /* Orange background */
   color: white; /* White text */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 20px; /* Space between the button and the user list */
 }
 
-.add-user-btn:hover {
-  background-color: #45a049; /* Darker green on hover */
+.edit-btn:hover {
+  background-color: #e69500; /* Darker orange on hover */
 }
 
-.user-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.user-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 15px;
-  margin-bottom: 10px;
-}
-
-.button-container {
-  display: flex;
-  gap: 10px; /* Space between buttons */
-}
-
-.button-container-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px; /* Space between the button and the user list */
-}
-
-/* Styling for the button */
-.add-user-btn {
-  background-color: #4CAF50; /* Green background */
+/* Delete Button */
+.delete-btn {
+  background-color: #f44336; /* Red background */
   color: white; /* White text */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.add-user-btn:hover {
-  background-color: #45a049; /* Darker green on hover */
+.delete-btn:hover {
+  background-color: #e53935; /* Darker red on hover */
 }

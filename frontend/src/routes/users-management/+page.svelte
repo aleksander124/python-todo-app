@@ -30,6 +30,10 @@
     isAdding = true;
   }
 
+  function redirectToHome() {
+    window.location.href = '/'; // Adjust this path to match your home route
+  }
+
   // Function to delete a user
   async function deleteUser(userId: number) {
     try {
@@ -197,10 +201,11 @@
 <main>
   <h1>User Management</h1>
 
-  <!-- Container to align the button to the right -->
   <div class="button-container-wrapper">
-    <!-- Button to add new user, now correctly positioned above the user list -->
+    <!-- Button to add new user -->
     <button class="add-user-btn" type="button" on:click={startAdding}>Add New User</button>
+    <!-- Button to redirect to the home page -->
+    <button class="home-btn" type="button" on:click={redirectToHome}>Home</button>
   </div>
 
   {#if error}
@@ -217,8 +222,8 @@
         <li class="user-item">
           {user.username} ({user.email})
           <div class="button-container">
-            <button type="button" on:click={() => startEditing(user)}>Edit</button>
-            <button type="button" on:click={() => deleteUser(user.id)}>Delete</button>
+            <button type="button" class="edit-btn" on:click={() => startEditing(user)}>Edit</button>
+            <button type="button" class="delete-btn" on:click={() => deleteUser(user.id)}>Delete</button>
           </div>
         </li>
       {/each}

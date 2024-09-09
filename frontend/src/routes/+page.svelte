@@ -13,7 +13,7 @@
   };
 
   const goToUserManagement = () => {
-    window.location.href = '/user-management'; // Adjust the URL as needed
+    window.location.href = '/users-management'; // Adjust the URL as needed
   };
 </script>
 
