@@ -1,3 +1,4 @@
+/* Main container styling */
 .main-container {
     display: flex;
     flex-direction: column;
@@ -39,7 +40,7 @@ p {
     border-radius: 6px;
     background-color: #007bff;
     color: white;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -48,6 +49,7 @@ p {
 .button:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .button:active {
@@ -68,4 +70,33 @@ p {
 
 .button.register:hover {
     background-color: #e0a800;
+}
+
+.button.todo {
+    background-color: #17a2b8;
+}
+
+.button.todo:hover {
+    background-color: #138496;
+}
+
+.button.user-management {
+    background-color: #007bff; /* Default blue background */
+    color: white;
+}
+
+.button.user-management:hover {
+    background-color: #0056b3;
+}
+
+/* Add a gradient background for a more modern look */
+.button.user-management {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+.button.user-management:hover {
+    background: linear-gradient(45deg, #0056b3, #003d80);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }

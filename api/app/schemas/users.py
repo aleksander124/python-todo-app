@@ -13,8 +13,8 @@ class UserCreate(UserBase):
     username: str
     email: str
     password: str
-    is_active: Optional[bool] = None
-    is_superuser: Optional[bool] = None
+    is_active: Optional[bool] = True
+    is_superuser: Optional[bool] = False
 
 
 class UserUpdate(UserBase):

@@ -3,20 +3,26 @@ from app.models.items import Item
 from app.schemas.items import ItemCreate, ItemUpdate
 
 
-def create_item(db: Session, item: ItemCreate):
-    db_item = Item(**item.dict())
+def create_item(db: Session, item: ItemCreate, creator_id: int):
+    # Add the creator_id to the item
+    db_item = Item(**item.dict(), creator_id=creator_id)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
     return db_item
 
 
+#TODO: add function to get_user_items
 def get_item(db: Session, item_id: int):
     return db.query(Item).filter(item_id == Item.id).first()
 
 
 def get_items(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Item).offset(skip).limit(limit).all()
+
+
+def get_current_user_items(db: Session, user_id: int, skip: int = 0, limit: int = 10):
+    return db.query(Item).filter(Item.creator_id == user_id).offset(skip).limit(limit).all()
 
 
 def update_item(db: Session, item_id: int, item: ItemUpdate):

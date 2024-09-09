@@ -76,3 +76,46 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
 
     print(f"Authenticated user: {user.username}")
     return user
+
+
+async def get_current_superuser(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    superuser_exception = HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Insufficient permissions"
+    )
+
+    try:
+        # Decode the JWT token
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        print(f"JWT payload: {payload}")
+        username: str = payload.get("sub")
+
+        if username is None:
+            print("Username not found in token")
+            raise credentials_exception
+
+        # Create TokenData object
+        token_data = TokenData(username=username)
+    except JWTError as e:
+        print(f"JWT Error: {e}")
+        raise credentials_exception
+
+    # Retrieve user from database
+    user = get_user_by_username(db, username=token_data.username)
+    if user is None:
+        print(f"User with username {token_data.username} not found")
+        raise credentials_exception
+
+    # Check if the user is a superuser
+    if not user.is_superuser:
+        print(f"User {user.username} is not a superuser")
+        raise superuser_exception
+
+    print(f"Authenticated superuser: {user.username}")
+    return user

@@ -20,5 +20,6 @@ class ItemUpdate(ItemBase):
 
 class Item(ItemBase):
     id: int
+    creator_id: int
 
     model_config = ConfigDict(from_attributes=True)

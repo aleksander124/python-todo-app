@@ -73,8 +73,16 @@ button:hover {
     background-color: #5a6268;
 }
 
+/* Message styles */
 .message {
     margin-top: 1rem;
     text-align: center;
-    color: red;
+}
+
+.message.success {
+    color: green; /* Green color for success messages */
+}
+
+.message.error {
+    color: red; /* Red color for error messages */
 }

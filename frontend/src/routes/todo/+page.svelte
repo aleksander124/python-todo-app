@@ -29,7 +29,7 @@
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/items/', {
+      const response = await fetch('http://localhost:8000/api/my/items/', {
         headers: {
           'Authorization': `Bearer ${token}`, // Include the token in the request
           'Content-Type': 'application/json'
