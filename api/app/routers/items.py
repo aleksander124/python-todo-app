@@ -1,8 +1,9 @@
 import logging
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.crud.items import create_item as crud_create_item, get_item as crud_get_item, get_items as crud_get_items
-from app.crud.items import delete_item as crud_delete_item, update_item as crud_update_item
+from app.crud.items import delete_item as crud_delete_item, update_item as crud_update_item, get_current_user_items
 from app.schemas.items import ItemCreate, ItemUpdate, Item
 from app.dependencies.db_connect import get_db
 from app.dependencies.auth import get_current_user
@@ -69,6 +70,16 @@ def read_items(
 
     items = crud_get_items(db, skip=skip, limit=limit)
     return items
+
+
+@router.get("/my/items", response_model=List[Item], description="Retrieve current user's items.")
+def get_my_items(
+    skip: int = 0,
+    limit: int = 10,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    return get_current_user_items(db=db, user_id=current_user.id, skip=skip, limit=limit)
 
 
 @router.put("/items/{item_id}", response_model=Item)

@@ -12,12 +12,17 @@ def create_item(db: Session, item: ItemCreate, creator_id: int):
     return db_item
 
 
+#TODO: add function to get_user_items
 def get_item(db: Session, item_id: int):
     return db.query(Item).filter(item_id == Item.id).first()
 
 
 def get_items(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Item).offset(skip).limit(limit).all()
+
+
+def get_current_user_items(db: Session, user_id: int, skip: int = 0, limit: int = 10):
+    return db.query(Item).filter(Item.creator_id == user_id).offset(skip).limit(limit).all()
 
 
 def update_item(db: Session, item_id: int, item: ItemUpdate):
