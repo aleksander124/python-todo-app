@@ -1,3 +1,4 @@
+/* Main container styling */
 .main-container {
     display: flex;
     flex-direction: column;
@@ -68,4 +69,20 @@ p {
 
 .button.register:hover {
     background-color: #e0a800;
+}
+
+.button.todo {
+    background-color: #17a2b8;
+}
+
+.button.todo:hover {
+    background-color: #138496;
+}
+
+.button.user-management {
+    background-color: #6c757d; /* Gray background */
+}
+
+.button.user-management:hover {
+    background-color: #5a6268;
 }
