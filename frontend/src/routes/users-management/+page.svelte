@@ -147,7 +147,7 @@
         is_active: isActive
       };
 
-      const response = await fetch('http://localhost:8000/auth/users/', {
+      const response = await fetch('http://localhost:8000/auth/create-user/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -173,12 +173,15 @@
 
   // Fetch users on component mount
   onMount(async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('No token found');
-      }
+    const token = localStorage.getItem('token');
 
+    // Redirect to login if no token is found
+    if (!token) {
+      window.location.href = '/login'; // Redirect to login page
+      return;
+    }
+
+    try {
       const response = await fetch('http://localhost:8000/auth/users/', {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -220,7 +223,10 @@
     <ul class="user-list">
       {#each users as user}
         <li class="user-item">
-          {user.username} ({user.email})
+          <div class="user-info">
+            <span class="username">{user.username}</span>
+            <span class="email">{user.email}</span>
+          </div>
           <div class="button-container">
             <button type="button" class="edit-btn" on:click={() => startEditing(user)}>Edit</button>
             <button type="button" class="delete-btn" on:click={() => deleteUser(user.id)}>Delete</button>
