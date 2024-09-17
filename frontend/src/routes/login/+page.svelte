@@ -24,7 +24,7 @@
         const data = await response.json();
         localStorage.setItem('token', data.access_token); // Store token in local storage
         message = 'Login successful!';
-        window.location.href = '/todo';
+        window.location.href = '/';
       } else {
         const error = await response.json();
         message = `Error: ${error.detail}`;
