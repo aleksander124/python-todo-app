@@ -223,7 +223,10 @@
     <ul class="user-list">
       {#each users as user}
         <li class="user-item">
-          {user.username}[{user.email}]
+          <div class="user-info">
+            <span class="username">{user.username}</span>
+            <span class="email">{user.email}</span>
+          </div>
           <div class="button-container">
             <button type="button" class="edit-btn" on:click={() => startEditing(user)}>Edit</button>
             <button type="button" class="delete-btn" on:click={() => deleteUser(user.id)}>Delete</button>

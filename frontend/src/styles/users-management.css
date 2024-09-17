@@ -54,12 +54,53 @@ li:hover {
   background-color: #f1f1f1;
 }
 
+/* Styling the user list */
+.user-list {
+  padding: 0;
+  margin: 0;
+}
+
+.user-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* User info styling */
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.email {
+  font-size: 0.9rem;
+  color: #777;
+}
+
 /* Container for buttons to align them right */
 .button-container-wrapper {
   display: flex;
   justify-content: flex-end;
-  gap: 10px; /* Space between buttons */
-  margin-bottom: 10px; /* Space between the button and the user list */
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 /* Common button styles */
@@ -71,31 +112,28 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  display: inline-block;
-  text-align: center;
-  line-height: 1.5; /* Ensures text is vertically centered */
 }
 
 /* Add New User Button */
 .add-user-btn {
-  background-color: #4CAF50; /* Green background */
-  color: white; /* White text */
+  background-color: #4CAF50;
+  color: white;
 }
 
 .add-user-btn:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049;
 }
 
 /* Home Button */
 .home-btn {
-  background: linear-gradient(145deg, #007bff, #0056b3); /* Gradient background */
-  color: white; /* White text */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background: linear-gradient(145deg, #007bff, #0056b3);
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .home-btn:hover {
-  background: linear-gradient(145deg, #0056b3, #003d7a); /* Darker gradient on hover */
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  background: linear-gradient(145deg, #0056b3, #003d7a);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Modal popup styling */
@@ -162,7 +200,6 @@ button {
   font-size: 1rem;
 }
 
-/* Button styles for popup */
 .popup button[type="submit"] {
   background-color: #4CAF50;
 }
@@ -181,20 +218,20 @@ button {
 
 /* Edit Button */
 .edit-btn {
-  background-color: #ffa500; /* Orange background */
-  color: white; /* White text */
+  background-color: #ffa500;
+  color: white;
 }
 
 .edit-btn:hover {
-  background-color: #e69500; /* Darker orange on hover */
+  background-color: #e69500;
 }
 
 /* Delete Button */
 .delete-btn {
-  background-color: #f44336; /* Red background */
-  color: white; /* White text */
+  background-color: #f44336;
+  color: white;
 }
 
 .delete-btn:hover {
-  background-color: #e53935; /* Darker red on hover */
+  background-color: #e53935;
 }
