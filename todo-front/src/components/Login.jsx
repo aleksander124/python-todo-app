@@ -49,42 +49,42 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="username">Username:</label>
-        <input
-          id="username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter your username"
-          required // Ensure this field is required
-        />
+      <div className="login-page"> {/* Unique class added */}
+        <h1>Login</h1>
+        <form onSubmit={handleLogin}>
+          <label htmlFor="username">Username:</label>
+          <input
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
+              required
+          />
 
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
-          required // Ensure this field is required
-        />
+          <label htmlFor="password">Password:</label>
+          <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+          />
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit">Login</button>
+        </form>
 
-      <button className="button-secondary" onClick={redirectToRegister}>
-        Don't have an account? Register
-      </button>
+        <button className="button-secondary" onClick={redirectToRegister}>
+          Don't have an account? Register
+        </button>
 
-      <button className="button-tertiary" onClick={goToMainMenu}>
-        Back to Main Menu
-      </button>
+        <button className="button-tertiary" onClick={goToMainMenu}>
+          Back to Main Menu
+        </button>
 
-      {message && <div className="message">{message}</div>}
-    </div>
+        {message && <div className="message">{message}</div>}
+      </div>
   );
 };
 

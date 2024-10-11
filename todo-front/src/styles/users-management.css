@@ -1,135 +1,135 @@
-main {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+/*main {*/
+/*  font-family: Arial, sans-serif;*/
+/*  padding: 20px;*/
+/*  max-width: 800px;*/
+/*  margin: auto;*/
+/*  background-color: #f9f9f9;*/
+/*  border-radius: 8px;*/
+/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+/*}*/
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
-}
+/*h1 {*/
+/*  font-size: 2rem;*/
+/*  margin-bottom: 20px;*/
+/*  color: #333;*/
+/*}*/
 
-.error {
-  color: #f44336;
-  background-color: #ffebee;
-  border: 1px solid #f44336;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-}
+/*.error {*/
+/*  color: #f44336;*/
+/*  background-color: #ffebee;*/
+/*  border: 1px solid #f44336;*/
+/*  padding: 10px;*/
+/*  border-radius: 4px;*/
+/*  margin-bottom: 20px;*/
+/*}*/
 
-.loading {
-  color: #555;
-  font-style: italic;
-}
+/*.loading {*/
+/*  color: #555;*/
+/*  font-style: italic;*/
+/*}*/
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+/*ul {*/
+/*  list-style-type: none;*/
+/*  padding: 0;*/
+/*}*/
 
-li {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+/*li {*/
+/*  background-color: #fff;*/
+/*  border: 1px solid #ddd;*/
+/*  border-radius: 4px;*/
+/*  padding: 15px;*/
+/*  margin-bottom: 10px;*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*}*/
 
-li:hover {
-  background-color: #f1f1f1;
-}
+/*li:hover {*/
+/*  background-color: #f1f1f1;*/
+/*}*/
 
-.button-container-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+/*.button-container-wrapper {*/
+/*  display: flex;*/
+/*  justify-content: flex-start;*/
+/*  gap: 10px;*/
+/*  margin-bottom: 20px;*/
+/*}*/
 
-.add-user-btn, .home-btn, .edit-btn, .delete-btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+/*.add-user-btn, .home-btn, .edit-btn, .delete-btn {*/
+/*  padding: 10px 15px;*/
+/*  border: none;*/
+/*  border-radius: 4px;*/
+/*  cursor: pointer;*/
+/*}*/
 
-.add-user-btn {
-  background-color: #4CAF50;
-  color: white;
-}
+/*.add-user-btn {*/
+/*  background-color: #4CAF50;*/
+/*  color: white;*/
+/*}*/
 
-.home-btn {
-  background-color: #2196F3;
-  color: white;
-}
+/*.home-btn {*/
+/*  background-color: #2196F3;*/
+/*  color: white;*/
+/*}*/
 
-.edit-btn {
-  background-color: #FFA500;
-  color: white;
-}
+/*.edit-btn {*/
+/*  background-color: #FFA500;*/
+/*  color: white;*/
+/*}*/
 
-.delete-btn {
-  background-color: #f44336;
-  color: white;
-}
+/*.delete-btn {*/
+/*  background-color: #f44336;*/
+/*  color: white;*/
+/*}*/
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
+/*.overlay {*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  bottom: 0;*/
+/*  background: rgba(0, 0, 0, 0.5);*/
+/*}*/
 
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  z-index: 10;
-  width: 90%;
-  max-width: 500px;
-}
+/*.popup {*/
+/*  position: fixed;*/
+/*  top: 50%;*/
+/*  left: 50%;*/
+/*  transform: translate(-50%, -50%);*/
+/*  background: white;*/
+/*  padding: 20px;*/
+/*  border-radius: 8px;*/
+/*  z-index: 10;*/
+/*  width: 90%;*/
+/*  max-width: 500px;*/
+/*}*/
 
-.popup h2 {
-  margin-top: 0;
-}
+/*.popup h2 {*/
+/*  margin-top: 0;*/
+/*}*/
 
-.popup label {
-  display: block;
-  margin-bottom: 5px;
-}
+/*.popup label {*/
+/*  display: block;*/
+/*  margin-bottom: 5px;*/
+/*}*/
 
-.popup input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
+/*.popup input {*/
+/*  width: 100%;*/
+/*  padding: 10px;*/
+/*  margin-bottom: 15px;*/
+/*  border: 1px solid #ddd;*/
+/*  border-radius: 4px;*/
+/*}*/
 
-.popup button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-}
+/*.popup button {*/
+/*  padding: 10px 15px;*/
+/*  border: none;*/
+/*  border-radius: 4px;*/
+/*  cursor: pointer;*/
+/*  margin-right: 10px;*/
+/*}*/
 
-.popup button:last-child {
-  background-color: #f44336;
-  color: white;
-}
+/*.popup button:last-child {*/
+/*  background-color: #f44336;*/
+/*  color: white;*/
+/*}*/

@@ -1,36 +1,49 @@
+/* main-page.css */
+
+/* Container styling */
 .main-container {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 50px;
-  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f0f2f5;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
+/* Header styling */
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #333;
+  margin-bottom: 20px;
 }
 
+/* Paragraph styling */
 p {
   font-size: 1.2rem;
   color: #666;
+  margin-bottom: 30px;
 }
 
+/* Button container */
 .button-container {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+/* General button styling */
 .button {
-  padding: 15px 20px;
-  margin: 10px;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1rem;
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Specific button colors */
 .button.login {
   background-color: #4CAF50; /* Green */
   color: white;
@@ -42,7 +55,7 @@ p {
 }
 
 .button.todo {
-  background-color: #FF9800; /* Orange */
+  background-color: #FFC107; /* Amber */
   color: white;
 }
 
@@ -51,6 +64,19 @@ p {
   color: white;
 }
 
+/* Hover effects */
 .button:hover {
-  opacity: 0.8;
+  opacity: 0.9;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+  .main-container {
+    padding: 15px;
+  }
+
+  .button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
 }
