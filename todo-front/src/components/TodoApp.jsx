@@ -1,5 +1,3 @@
-// TodoApp.jsx
-
 import React, { useEffect, useState } from 'react';
 import '../styles/todo.css'; // Import your CSS file here
 
@@ -185,7 +183,7 @@ const TodoApp = () => {
   };
 
   return (
-    <main>
+    <main className="todo-container">
       <h1>Items List</h1>
 
       <div className="navigation-buttons">
@@ -207,14 +205,17 @@ const TodoApp = () => {
             <div className="item-title">{item.title}</div>
             <div className="item-description">{item.description}</div>
           </div>
-          <button className="edit-button" onClick={() => openEditModal(item)}>Edit</button>
-          <button className="delete-button" onClick={() => deleteItem(item.id)}>Delete</button>
+          <div className="item-buttons">
+            <button className="edit-button" onClick={() => openEditModal(item)}>Edit</button>
+            <button className="delete-button" onClick={() => deleteItem(item.id)}>Delete</button>
+          </div>
         </div>
       ))}
       <button className="create-button" onClick={openNewModal}>
         <span className="create-icon">+</span>
       </button>
 
+      {/* Edit Modal */}
       {isEditModalOpen && (
         <div className="modal">
           <div className="modal-content">
@@ -241,6 +242,7 @@ const TodoApp = () => {
         </div>
       )}
 
+      {/* New Item Modal */}
       {isNewModalOpen && (
         <div className="modal">
           <div className="modal-content">

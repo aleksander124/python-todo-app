@@ -1,32 +1,210 @@
-/* src/styles/todo.css */
+/* General styles for the Todo application */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+/* Main container styling */
 .todo-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.todo-list {
-  list-style-type: none;
-  padding: 0;
+/* Header styling */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-.todo-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
+/* Button styles */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.todo-item:hover {
-  background-color: #f1f1f1;
+.main-menu-button,
+.logout-button,
+.create-button,
+.edit-button,
+.delete-button,
+.modal-cancel,
+.modal-save {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.add-todo-button {
-  margin-top: 20px;
+.main-menu-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.create-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #28a745;
+    color: white;
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-button:hover {
+    background-color: #218838;
+}
+
+.edit-button {
+    background-color: #ffc107;
+    color: white;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Hover effects */
+.main-menu-button:hover,
+.logout-button:hover,
+.edit-button:hover,
+.delete-button:hover,
+.modal-cancel:hover,
+.modal-save:hover {
+    opacity: 0.8;
+}
+
+/* Error and loading messages */
+.error {
+    color: #f44336;
+    background-color: #ffebee;
+    border: 1px solid #f44336;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.loading {
+    color: #555;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Item card styles */
+.item-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the start */
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fafafa;
+    transition: background-color 0.3s;
+}
+
+.item-card.completed {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.checkbox {
+    margin-right: 10px;
+    flex: 0 0 20px; /* Set fixed width for checkbox */
+}
+
+/* Item content styles */
+.item-content {
+    flex: 1; /* Allow item content to take the remaining space */
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.item-description {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 400px;
+}
+
+.modal-header {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+    .item-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .create-button {
+        right: 15px;
+        bottom: 15px;
+    }
 }

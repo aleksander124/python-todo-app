@@ -1,6 +1,6 @@
-// src/Login.jsx
+// src/components/Login.jsx
 import React, { useState } from 'react';
-import '../styles/login.css';
+import '../styles/login.css'; // Import your CSS styles
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -15,8 +15,8 @@ const Login = () => {
       username: username,
       password: password,
       scope: '',
-      client_id: 'string',  // Use actual client ID if necessary
-      client_secret: 'string'  // Use actual client secret if necessary
+      client_id: 'your_client_id',  // Replace with actual client ID if necessary
+      client_secret: 'your_client_secret'  // Replace with actual client secret if necessary
     });
 
     try {
@@ -30,7 +30,7 @@ const Login = () => {
         const data = await response.json();
         localStorage.setItem('token', data.access_token); // Store token in local storage
         setMessage('Login successful!');
-        window.location.href = '/'; // Redirect to the main menu
+        window.location.href = '/todo'; // Redirect to the todo page
       } else {
         const error = await response.json();
         setMessage(`Error: ${error.detail}`);
@@ -59,6 +59,7 @@ const Login = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter your username"
+          required // Ensure this field is required
         />
 
         <label htmlFor="password">Password:</label>
@@ -68,6 +69,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter your password"
+          required // Ensure this field is required
         />
 
         <button type="submit">Login</button>
