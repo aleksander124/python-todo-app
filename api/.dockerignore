@@ -1,0 +1,7 @@
+# Ignore test database file
+test.db
+
+# Ignore the tests directory
+app/tests/
+
+Containerfile
