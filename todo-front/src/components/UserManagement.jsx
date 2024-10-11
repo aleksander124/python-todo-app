@@ -195,7 +195,7 @@ const UserManagement = () => {
   };
 
   return (
-    <main>
+    <main className="user-management-page">
       <h1>User Management</h1>
 
       <div className="button-container-wrapper">
@@ -212,56 +212,66 @@ const UserManagement = () => {
       {error && <p className="error">{error}</p>}
       {users.length === 0 && !error && <p className="loading">Loading...</p>}
       {users.length > 0 && (
-        <ul className="user-list">
-          {users.map(user => (
-            <li className="user-item" key={user.id}>
-              <div className="user-info">
-                <span className="username">{user.username}</span>
-                <span className="email">{user.email}</span>
-              </div>
-              <div className="button-container">
-                <button type="button" className="edit-btn" onClick={() => startEditing(user)}>
-                  Edit
-                </button>
-                <button type="button" className="delete-btn" onClick={() => deleteUser(user.id)}>
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+          <ul className="user-list">
+            {users.map(user => (
+                <li className="user-item" key={user.id}>
+                  <div className="user-info">
+                    <span className="username">{user.username}</span>
+                    <span className="email">{user.email}</span>
+                  </div>
+                  <div className="button-container">
+                    <button type="button" className="edit-btn" onClick={() => startEditing(user)}>
+                      Edit
+                    </button>
+                    <button type="button" className="delete-btn" onClick={() => deleteUser(user.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </li>
+            ))}
+          </ul>
       )}
 
       {/* Popup for editing/adding user */}
       {(isEditing || isAdding) && (
-        <div className="overlay" role="button" onClick={cancelEditing} tabIndex={0} aria-label="Cancel editing" />
-      )}
-      {(isEditing || isAdding) && (
-        <div className="popup" role="dialog" aria-labelledby={isEditing ? 'edit-user' : 'add-user'}>
-          <h2 id={isEditing ? 'edit-user' : 'add-user'}>
-            {isEditing ? `Edit User: ${selectedUser.username}` : 'Add New User'}
-          </h2>
+          <>
+            {/* Overlay to darken the background */}
+            <div className="overlay" role="button" onClick={cancelEditing} tabIndex={0} aria-label="Cancel editing"/>
 
-          <form onSubmit={e => { e.preventDefault(); isEditing ? updateUser(selectedUser.id) : createUser(); }}>
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" value={newUsername} onChange={e => setNewUsername(e.target.value)} />
+            {/* Popup window */}
+            <div className="popup" role="dialog" aria-labelledby={isEditing ? 'edit-user' : 'add-user'}>
+              <h2 id={isEditing ? 'edit-user' : 'add-user'}>
+                {isEditing ? `Edit User: ${selectedUser.username}` : 'Add New User'}
+              </h2>
 
-            <label htmlFor="email">Email</label>
-            <input id="email" type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} />
+              <form onSubmit={e => {
+                e.preventDefault();
+                isEditing ? updateUser(selectedUser.id) : createUser();
+              }}>
+                <label htmlFor="username">Username</label>
+                <input id="username" type="text" value={newUsername} onChange={e => setNewUsername(e.target.value)}/>
 
-            <label htmlFor="password">Password {isEditing ? '(leave blank to keep current)' : ''}</label>
-            <input id="password" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+                <label htmlFor="email">Email</label>
+                <input id="email" type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)}/>
 
-            <label htmlFor="superuser">Is Superuser</label>
-            <input id="superuser" type="checkbox" checked={isSuperuser} onChange={e => setIsSuperuser(e.target.checked)} />
+                <label htmlFor="password">Password {isEditing ? '(leave blank to keep current)' : ''}</label>
+                <input id="password" type="password" value={newPassword}
+                       onChange={e => setNewPassword(e.target.value)}/>
 
-            <label htmlFor="active">Is Active</label>
-            <input id="active" type="checkbox" checked={isActive} onChange={e => setIsActive(e.target.checked)} />
+                <label htmlFor="superuser">Is Superuser</label>
+                <input id="superuser" type="checkbox" checked={isSuperuser}
+                       onChange={e => setIsSuperuser(e.target.checked)}/>
 
-            <button type="submit">{isEditing ? 'Update User' : 'Create User'}</button>
-            <button type="button" onClick={cancelEditing}>Cancel</button>
-          </form>
-        </div>
+                <label htmlFor="active">Is Active</label>
+                <input id="active" type="checkbox" checked={isActive} onChange={e => setIsActive(e.target.checked)}/>
+
+                <div className="popup-buttons">
+                  <button type="submit">{isEditing ? 'Update User' : 'Create User'}</button>
+                  <button type="button" onClick={cancelEditing}>Cancel</button>
+                </div>
+              </form>
+            </div>
+          </>
       )}
     </main>
   );
