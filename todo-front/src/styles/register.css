@@ -1,0 +1,57 @@
+/* src/styles/register.css */
+.container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-secondary {
+  background-color: #f0ad4e;
+  color: white;
+  margin-top: 10px;
+}
+
+.button-tertiary {
+  background-color: #d9534f;
+  color: white;
+  margin-top: 10px;
+}
+
+.message {
+  margin-top: 20px;
+  color: green; /* Default to green for success messages */
+}
+
+.message.error {
+  color: red; /* Set text color to red for error messages */
+}
