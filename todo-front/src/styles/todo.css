@@ -28,8 +28,8 @@ h1 {
 /* Button styles */
 .navigation-buttons {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    justify-content: space-between; /* Space out buttons */
+    margin-bottom: 20px; /* Add margin below navigation buttons */
 }
 
 .main-menu-button,
@@ -48,13 +48,34 @@ h1 {
 }
 
 .main-menu-button {
-    background-color: #007bff;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background */
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+    margin-right: 15px; /* Add margin to create space */
 }
 
 .logout-button {
-    background-color: #dc3545;
+    padding: 10px 20px;
+    background-color: #f44336; /* Red background */
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.main-menu-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.logout-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
 }
 
 .create-button {
@@ -76,21 +97,40 @@ h1 {
     background-color: #218838;
 }
 
+.edit-button, .delete-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.item-buttons {
+    display: flex; /* Use flexbox to align buttons */
+    gap: 10px; /* Add space between buttons */
+}
+
 .edit-button {
-    background-color: #ffc107;
+    background-color: #376fe1; /* Blue background */
     color: white;
 }
 
 .delete-button {
-    background-color: #dc3545;
+    background-color: #f44336; /* Red background */
     color: white;
 }
 
+/* Optional hover effects */
+.edit-button:hover {
+    background-color: #044d91; /* Darker blue on hover */
+}
+
+.delete-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+
 /* Hover effects */
-.main-menu-button:hover,
-.logout-button:hover,
-.edit-button:hover,
-.delete-button:hover,
 .modal-cancel:hover,
 .modal-save:hover {
     opacity: 0.8;
