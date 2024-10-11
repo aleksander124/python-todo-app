@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/todo.css'; // Import your CSS file here
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const TodoApp = () => {
   const [items, setItems] = useState([]);
@@ -20,7 +21,7 @@ const TodoApp = () => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/my/items/', {
+        const response = await fetch(`${apiUrl}/api/my/items/`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -163,7 +164,7 @@ const TodoApp = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/items/', {
+      const response = await fetch(`${apiUrl}/api/items/`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
