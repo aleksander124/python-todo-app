@@ -1,6 +1,7 @@
 // src/Registration.jsx
 import React, { useState } from 'react';
 import '../styles/register.css'; // Import the registration styles
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Registration = () => {
   const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ const Registration = () => {
     });
 
     try {
-      const response = await fetch('http://localhost:8000/auth/create-user/', {
+      const response = await fetch(`${apiUrl}/auth/create-user/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: formData

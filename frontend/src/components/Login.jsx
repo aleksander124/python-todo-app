@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import '../styles/login.css'; // Import your CSS styles
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +22,7 @@ const Login = () => {
     });
 
     try {
-      const response = await fetch('http://localhost:8000/auth/token', {
+      const response = await fetch(`${apiUrl}/auth/token`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString(),

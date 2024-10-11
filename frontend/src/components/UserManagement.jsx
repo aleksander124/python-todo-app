@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/users-management.css';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -25,7 +26,7 @@ const UserManagement = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:8000/auth/users/', {
+        const response = await fetch(`${apiUrl}/auth/users/`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -170,7 +171,7 @@ const UserManagement = () => {
         is_active: isActive,
       };
 
-      const response = await fetch('http://localhost:8000/auth/create-user/', {
+      const response = await fetch(`${apiUrl}/auth/create-user/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
