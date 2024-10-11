@@ -5,3 +5,7 @@ test.db
 app/tests/
 
 Containerfile
+
+.env
+
+app/.env
