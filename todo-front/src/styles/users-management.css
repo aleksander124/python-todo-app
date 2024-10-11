@@ -31,6 +31,7 @@ h1 {
   border-radius: 4px;
   color: white;
   cursor: pointer;
+  width: 100%;
 }
 
 .add-user-btn:hover,
@@ -90,7 +91,10 @@ h1 {
 /* Button container for edit/delete actions */
 .button-container {
   display: flex;
-  gap: 10px;
+  gap: 10px;          /* Ensures space between the buttons */
+  justify-content: flex-end;
+  align-items: center; /* Aligns buttons horizontally and at the same height */
+  flex-direction: row; /* Ensures buttons are placed in a row (horizontally) */
 }
 
 .edit-btn,
@@ -102,7 +106,7 @@ h1 {
 }
 
 .edit-btn {
-  background-color: #2196f3;
+  background-color: #2658bf;
   color: white;
 }
 
@@ -112,7 +116,7 @@ h1 {
 }
 
 .edit-btn:hover {
-  background-color: #1e88e5;
+  background-color: #044d91;
 }
 
 .delete-btn:hover {
